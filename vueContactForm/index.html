@@ -15,14 +15,17 @@
                 <div>
                     <label for="name">Name</label>
                     <input name="name" id="name" v-model="form.name" />
+                    <p style="color: red;">{{nameValidation}} </p>
                 </div>
                 <div>
                     <label for="email">Email</label>
                     <input name="email" id="email" v-model="form.email"/>
+                    <p style="color: red;">{{emailValidation}} </p>
                 </div>
                 <div>
                     <label for="message">Message</label>
                     <textarea name="message" id="message" v-model="form.message"></textarea>
+                    <p style="color: red;">{{messageValidation}} </p>
                 </div>
 
                 <button @click.prevent="validateForm">Send Form</button>
@@ -55,6 +58,23 @@
 
                         return this.error = "Invalid Form"
                     }
+                },
+                computed: {
+                    nameValidation: function(){
+                        if(!this.form.name.length){
+                            return `Name Field is Required`
+                        }
+                    },
+                    emailValidation: function () {
+                        if ( ! this.form.email.length && this.error) {
+                            return 'Email Field is Required';
+                        }
+                    },
+                    messageValidation: function () {
+                        if ( ! this.form.email.length && this.error) {
+                            return 'Message Field is Required';
+                        }
+                    },
                 }
             });
         </script>
